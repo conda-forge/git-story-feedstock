@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/git-story-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/git-story-{{ version }}.tar.gz
   sha256: d5b0f45dca0646c8104ede268efd0ee75ba3f13838bf4e024cd629b0e44206e0
 
 build:
@@ -14,14 +14,14 @@ build:
     - git-story=git_story.__main__:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - gitpython
     - manim
 
@@ -34,6 +34,7 @@ test:
   requires:
     - pip
     - git
+    - python {{ python_min }}
 
 about:
   home: https://initialcommit.com/tools/git-story
